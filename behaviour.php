@@ -71,7 +71,9 @@ class qbehaviour_opaque extends question_behaviour {
         $step->set_behaviour_var('_language', current_language());
         $step->set_behaviour_var('_preferredbehaviour', $this->preferredbehaviour);
         $opaquestate = qtype_opaque_update_state($this->qa, $step);
-        $step->set_behaviour_var('_statestring', $opaquestate->progressinfo);
+
+        if(!empty($opaquestate->progressinfo))
+            $step->set_behaviour_var('_statestring', $opaquestate->progressinfo);
 
         // Remember the question summary.
         $this->questionsummary = html_to_text($opaquestate->xhtml, 0, false);
